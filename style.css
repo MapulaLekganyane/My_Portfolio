@@ -74,7 +74,7 @@ header .brand a {
 	height: 100vh; /* full viewport height */
 	width: 100%;
 	background-image: url('./grad img.jpeg');
-	background-position: top center; /* center the image */
+	background-position: center; /* center the image */
 	background-size: cover; /* make it fully cover the section */
 	background-repeat: no-repeat;
 	background-attachment: fixed; /* optional: creates a subtle parallax effect */
@@ -325,4 +325,5 @@ footer {
 		flex-direction: column;
 	}
 }
+
 
