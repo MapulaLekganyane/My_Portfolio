@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapula Lekganyane | Full-Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 10px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #ffffff;
+            color: #1e1e2f;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e28c2b;
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background: #0a0a14;
+            z-index: 1100;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.8rem 0;
+        }
+
+        .brand a {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e28c2b, #f5a342);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #eef2ff;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.2s;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2.5px;
+            bottom: -2px;
+            left: 0;
+            background: #e28c2b;
+            border-radius: 2px;
+            transition: width 0.25s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #e28c2b;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger .bar {
+            width: 26px;
+            height: 2.5px;
+            background: #ffffff;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        /* ===== HERO SECTION (with background image) ===== */
+        #hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: url('mapula-profile.jpg');
+            background-size: 80% auto;
+            background-position: center 65%; /* adjust to focus on face */
+            background-repeat: no-repeat;
+            
+            /* Fallback gradient if image doesn't load */
+            background-color: #0c0c1a;
+            
+            /* Create a dark overlay using a pseudo-element (see ::before) */
+        }
+        
+        /* Dark overlay for text readability */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 20, 15, 0.65); /* semi-transparent dark overlay */
+            /* backdrop-filter: brightness(0.85);  subtle extra darkening */
+            z-index: 1;
+			background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+        }
+        
+        /* Ensure hero content is above overlay */
+        .hero-container {
+            position: relative;
+            z-index: 2;
+            max-width: 860px;
+            padding: 0 2rem;
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-container h1 {
+            font-size: 5.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #ffffff, #ffcd94);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-container h2 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: #e0e4ff;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-container p {
+            font-size: 1.7rem;
+            color: #cbd5e6;
+            margin-bottom: 2.8rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Buttons */
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: #e28c2b;
+            color: #0a0a14;
+            font-weight: 600;
+            padding: 1rem 2.6rem;
+            font-size: 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: all 0.25s;
+            box-shadow: 0 6px 14px rgba(226,140,43,0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta i {
+            font-size: 1.4rem;
+        }
+
+        .cta:hover {
+            background: #f09b3a;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 22px rgba(226,140,43,0.35);
+        }
+
+        .cta-outline {
+            background: transparent;
+            border: 2px solid #e28c2b;
+            color: #e28c2b;
+            box-shadow: none;
+        }
+
+        .cta-outline:hover {
+            background: rgba(226,140,43,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ===== ABOUT ===== */
+        #about {
+            padding: 9rem 0;
+            background: #fefaf5;
+        }
+
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-right h2 {
+            font-size: 3.6rem;
+            font-weight: 700;
+            color: #1e1e2a;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-right h2:after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background: #e28c2b;
+            display: block;
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+
+        .about-right p {
+            font-size: 1.65rem;
+            color: #2c2c3a;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2rem 0 2.5rem;
+        }
+		
+		/* Core Competencies Grid */
+		.competencies-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1rem;
+		margin: 1.5rem 0 0.5rem;
+		text-align: left;
+		}
+
+		.competency-item {
+		background: #fff;
+		border-radius: 12px;
+		padding: 0.8rem 1.2rem;
+		font-size: 1.45rem;
+		font-weight: 500;
+		color: #2c2c3a;
+		border: 1px solid #f0e0d0;
+		transition: all 0.2s ease;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		}
+
+		.competency-item i {
+		font-size: 1.8rem;
+		color: #e28c2b;
+		min-width: 32px;
+		text-align: center;
+		}
+
+		.competency-item:hover {
+		transform: translateX(5px);
+		border-color: #e28c2b;
+		background: #fffaf5;
+		}
+
+        .skill-tag {
+            background: #ffffff;
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            color: #e28c2b;
+            border: 1px solid #ffe2c1;
+        }
+		
+		/* Experience & Education Styles */
+		.experience-item {
+			background: #fff;
+			border-radius: 16px;
+			padding: 1.8rem;
+			margin-bottom: 2.0rem;
+			text-align: left;
+			border: 1px solid #f0e0d0;
+			transition: all 0.2s ease;
+		}
+
+		.experience-item:hover {
+			border-color: #e28c2b;
+			transform: translateX(5px);
+		}
+
+		.exp-header {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-bottom: 2.0rem;
+		}
+
+		.exp-title {
+			font-size: 1.7rem;
+			font-weight: 700;
+			color: #1e1e2a;
+		}
+
+		.exp-date {
+			font-size: 1.4rem;
+			color: #e28c2b;
+			font-weight: 500;
+		}
+
+		.exp-company {
+			font-size: 1.5rem;
+			color: #5a5a6a;
+			margin-bottom: 1rem;
+			font-style: italic;
+		}
+
+		.exp-duties {
+			margin-left: 2rem;
+			font-size: 1.45rem;
+			color: #3a3a4a;
+			line-height: 1.6;
+		}
+
+		.exp-duties li {
+			margin-bottom: 0.5rem;
+		}
+
+		.exp-detail {
+			font-size: 1.45rem;
+			color: #3a3a4a;
+			margin-top: 0.5rem;
+		}
+
+				/* Certificates Styles */
+		.cert-item {
+			background: #fff;
+			border-radius: 16px;
+			padding: 1.2rem 1.8rem;
+			margin-bottom: 1.2rem;
+			text-align: left;
+			border: 1px solid #f0e0d0;
+			transition: all 0.2s ease;
+			display: flex;
+			align-items: center;
+			gap: 1.2rem;
+		}
+
+		.cert-item:hover {
+			border-color: #e28c2b;
+			transform: translateX(5px);
+		}
+
+		.cert-item i {
+			font-size: 2rem;
+			color: #e28c2b;
+			min-width: 35px;
+			text-align: center;
+		}
+
+		.cert-details {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			flex: 1;
+		}
+
+		.cert-name {
+			font-size: 1.55rem;
+			font-weight: 500;
+			color: #2c2c3a;
+		}
+
+		.cert-date {
+			font-size: 1.35rem;
+			color: #e28c2b;
+			font-weight: 600;
+			background: #fef2e8;
+			padding: 0.3rem 1rem;
+			border-radius: 30px;
+		}
+
+
+        .download-resume {
+            margin-top: 1rem;
+        }
+
+        /* ===== PROJECTS ===== */
+        #projects {
+            padding: 9rem 0;
+            background: #ffffff;
+        }
+
+        .projects-container h2 {
+            text-align: center;
+            font-size: 3.6rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            color: #1e1e2a;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            margin-bottom: 4rem;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 40px -12px rgba(0,0,0,0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            object-fit: cover;
+            background: linear-gradient(135deg, #2c2c3a, #1a1a2a);
+        }
+
+        .project-content {
+            padding: 2.5rem;
+            flex: 2;
+        }
+
+        .project-content h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .featured {
+            border: 1px solid rgba(226,140,43,0.4);
+            background: #fffefc;
+            box-shadow: 0 20px 30px -12px rgba(226,140,43,0.15);
+        }
+
+        .featured h3 {
+            color: #e28c2b;
+        }
+
+        .project-content p, .project-content li {
+            font-size: 1.5rem;
+            color: #3a3a4a;
+        }
+
+        .project-content ul {
+            margin: 1rem 0 1.2rem 1.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            margin-top: 1.8rem;
+        }
+
+        .project-links .cta {
+            padding: 0.7rem 1.8rem;
+            font-size: 1.3rem;
+        }
+
+        /* ===== CONTACT ===== */
+        #contact {
+            padding: 8rem 0;
+            background: linear-gradient(110deg, #f8f6f2 0%, #ffffff 100%);
+        }
+
+        .contact-container {
+            text-align: center;
+        }
+
+        .contact-container h2 {
+            font-size: 3.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-container > p {
+            font-size: 1.6rem;
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            color: #4a4a5a;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            width: 240px;
+            text-align: center;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid #f0e5da;
+        }
+
+        .contact-card i {
+            font-size: 2.8rem;
+            color: #e28c2b;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .contact-card p, .contact-card a {
+            font-size: 1.4rem;
+            color: #3e3e4e;
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            color: #e28c2b;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a14;
+            color: #9ca3af;
+            text-align: center;
+            padding: 2.5rem 0;
+            font-size: 1.4rem;
+        }
+
+        /* Scroll reveal */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 880px) {
+            .project-card {
+                flex-direction: column;
+            }
+            .project-card img {
+                max-width: 100%;
+                height: 240px;
+                object-fit: cover;
+            }
+            .hero-container h1 {
+                font-size: 3.8rem;
+            }
+            .hero-container h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #0f0f1c;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.35s ease;
+                border-top: 1px solid rgba(255,255,255,0.05);
+                box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2);
+            }
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            .nav-links.active {
+                max-height: 320px;
+                padding: 1rem 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+            .contact-card {
+                width: 100%;
+                max-width: 260px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-container h1 {
+                font-size: 3rem;
+            }
+            .hero-container h2 {
+                font-size: 1.5rem;
+            }
+            .skills-grid {
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <div class="container header-container">
+        <div class="brand"><a href="#hero">Mapula Michell Lekganyane</a></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section with Background Image -->
+<section id="hero">
+    <div class="hero-container">
+        <h1>Hi, I'm Mapula</h1>
+        <h2>Software Developer specializing in enterprise web applications and business systems.</h2>
+        <p>With 3+ years of experience building enterprise systems for government departments, I turn complex requirements into reliable software.</p>
+        <div class="hero-buttons">
+            <a href="#projects" class="cta"><i class="fas fa-arrow-right"></i> View My Work</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section with Core Competencies -->
+<section id="about">
+    <div class="container about-container">
+        <div class="about-right">
+            <h2>About Me</h2>
+            <p>
+                Results-driven Software Developer with a BSc in Information Technology (Software Engineering) and experience developing and supporting business-critical systems. Skilled in full-stack development, ASP.NET MVC, C#, SQL Server, PostgreSQL, JavaScript, Angular, React, Azure, and IIS deployment. Strong background in troubleshooting, database management, and building scalable software solutions that improve operational efficiency.
+            </p>
+			
+            <!-- Core Competencies (new block) -->
+            <h3 style="font-size: 2rem; margin-top: 2rem; color: #e28c2b;">Core Competencies</h3>
+            <div class="competencies-grid">
+                <div class="competency-item"><i class="fas fa-code"></i> Full-stack web application development</div>
+                <div class="competency-item"><i class="fas fa-bug"></i> Problem-solving, troubleshooting, and production application support</div>
+                <div class="competency-item"><i class="fas fa-exchange-alt"></i> Translating manual processes into digital systems</div>
+                <div class="competency-item"><i class="fas fa-chart-line"></i> Business requirements analysis and implementation</div>
+                <div class="competency-item"><i class="fas fa-users"></i> Team collaboration and communication</div>
+                <div class="competency-item"><i class="fas fa-graduation-cap"></i> Continuous learning and adaptability</div>
+				<div class="competency-item"><i class="fas fa-vial"></i>Software Testing and Quality Assurance</div>
+				<div class="competency-item"><i class="fas fa-clipboard-check"></i>User Acceptance Testing (UAT)</div>
+            </div>
+
+            <h3 style="font-size: 2rem; margin-top: 2rem; color: #e28c2b;">Technical Skills</h3>
+            <div class="skills-grid">
+                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5</span>
+                <span class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</span>
+                <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="skill-tag"><i class="fas fa-code"></i> C# / ASP.NET MVC</span>
+                <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+				<span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                <span class="skill-tag"><i class="fab fa-angular"></i> Angular</span>
+                <span class="skill-tag"><i class="fab fa-react"></i> React</span>
+                <span class="skill-tag"><i class="fas fa-database"></i> SQL Server</span>
+                <span class="skill-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+                <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+                <span class="skill-tag"><i class="fab fa-github"></i> GitHub</span>
+                <span class="skill-tag"><i class="fab fa-microsoft"></i> Microsoft Azure</span>
+                <span class="skill-tag"><i class="fas fa-server"></i> IIS</span>
+                <span class="skill-tag"><i class="fab fa-visual-studio"></i> Visual Studio</span>
+                <span class="skill-tag"><i class="fab fa-microsoft"></i> Microsoft 365</span>
+				<span class="skill-tag"><i class="fas fa-project-diagram"></i> SDLC</span>
+				<span class="skill-tag"><i class="fas fa-vial"></i> System Testing</span>
+				<span class="skill-tag"><i class="fas fa-users"></i> User Acceptance Testing</span>
+				<span class="skill-tag"><i class="fas fa-sync-alt"></i> Regression Testing</span>
+            </div>
+
+			<!-- Experience Section -->
+            <h3 style="font-size: 2rem; margin-top: 2rem; color: #e28c2b;">Experience</h3>
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-title">Software Developer</span>
+                    <span class="exp-date">2025 – Present</span>
+                </div>
+                <div class="exp-company">Department of Correctional Services | Pretoria, SA</div>
+                <ul class="exp-duties">
+                    <li>Develop and maintain enterprise web applications.</li>
+					<li>Design and manage SQL Server databases.</li>
+					<li>Perform system testing and troubleshooting.</li>
+					<li>Support live production systems.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-title">Software Development Intern</span>
+                    <span class="exp-date">2022 – 2025</span>
+                </div>
+                <div class="exp-company">Department of Home Affairs | Pretoria, SA</div>
+                <ul class="exp-duties">
+                    <li>Supported web application development and maintenance.</li>
+					<li>Participated in testing and debugging activities.</li>
+					<li>Assisted with database integration and user support.</li>
+                </ul>
+            </div>
+
+            <!-- Education Section -->
+            <h3 style="font-size: 2rem; margin-top: 2rem; color: #e28c2b;">Education</h3>
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-title">Bachelor of Science in Information Technology</span>
+                    <span class="exp-date">2019 – 2021</span>
+                </div>
+                <div class="exp-company">Richfield Graduate Institute of Technology</div>
+				<div class="exp-detail">Major: Software Engineering</div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-title">Matric</span>
+                    <span class="exp-date">2014 – 2018</span>
+                </div>
+                <div class="exp-company">Makgoka High School</div>
+                <div class="exp-detail">Major: Sciences and Pure mathematics</div>
+            </div>
+			
+			 <!-- Certifications Section -->
+            <h3 style="font-size: 2rem; margin-top: 2rem; color: #e28c2b;">Certifications</h3>
+            
+            <div class="cert-item">
+                <i class="fab fa-microsoft"></i>
+                <div class="cert-details">
+                    <span class="cert-name">Microsoft 365 Certified: Fundamentals</span>
+                    <span class="cert-date">2024</span>
+                </div>
+            </div>
+
+            <div class="cert-item">
+                <i class="fab fa-microsoft"></i>
+                <div class="cert-details">
+                    <span class="cert-name">Microsoft Certified: Dynamics 365 Fundamentals (CRM)</span>
+                    <span class="cert-date">2024</span>
+                </div>
+            </div>
+			
+			
+            <div class="download-resume">
+                <a href="Mapula Lekganyane - Junior Systems Developer.pdf" download class="cta cta-outline" target="_blank" ><i class="fas fa-download"></i> Download Resume</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section (unchanged) -->
+<section id="projects">
+    <div class="container projects-container">
+        <h2>Featured Projects</h2>
+
+        <div class="project-card featured fade-up">
+            <img src="./LindisBakery.png" alt="Lindis Bakery System Dashboard" style="width: 100%; max-width: 380px; height: 260px; object-fit: cover;">
+            <div class="project-content">
+                <h3><i class="fas fa-star" style="color: #e28c2b;"></i> Lindis Bakery Management System</h3>
+                <p>A full-stack bakery management system built using ASP.NET, SQL Server, and JavaScript. Designed to manage products, process orders, and streamline daily business operations.</p>
+                <p><strong>Tech Stack:</strong> C#, ASP.NET MVC, SQL Server, JavaScript</p>
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li>Product management (add, update, delete)</li>
+                    <li>Order processing system</li>
+                    <li>Admin dashboard</li>
+                </ul>
+                <p><strong>My Role:</strong></p>
+                <ul>
+                    <li>Developed backend APIs using ASP.NET</li>
+                    <li>Designed and implemented database</li>
+                    <li>Built user interface with HTML, CSS, JS</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://lindisbakery.onrender.com" class="cta" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/MapulaLekganyane/LindisBakery/tree/main" class="cta cta-outline" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card fade-up">
+            <img src="./Contraband.png" alt="Contraband Management System Interface" style="width: 100%; max-width: 380px; height: 260px; object-fit: cover;">
+            <div class="project-content">
+                <h3>Contraband Management System</h3>
+                <p>A secure role-based system for managing and tracking contraband records.</p>
+                <p><strong>Tech Stack:</strong> C#, ASP.NET MVC, SQL Server</p>
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li>User authentication and authorization</li>
+                    <li>Role-based access control for Correctional Officials, Supervisors, and Administrators</li>
+                    <li>Dashboard and statistical reporting</li>
+                </ul>
+                <p><strong>My Role:</strong></p>
+                <ul>
+                    <li>Developed user authentication and role-based access control functionality</li>
+                    <li>Built modules for capturing, updating, and tracking contraband records</li>
+                    <li>Developed the SQL Server database structure and relationships</li>
+                </ul>
+				
+				<div class="project-links">
+					<span class="cta cta-outline">
+						<i class="fas fa-lock"></i> Internal Government System
+					</span>
+					<span class="cta cta-outline">
+						<i class="fas fa-shield-alt"></i> Source Code Confidential
+					</span>
+				</div>
+				<p style="margin-top:15px;color:#666;font-style:italic;">
+					Developed within a government environment.
+					Source code and live system access are restricted due to security and confidentiality requirements.
+				</p>
+			</div>
+        </div>
+		
+		<div class="project-card fade-up">
+            <img src="./Booking.png" alt="Inmate Visit Booking System Interface" style="width: 100%; max-width: 380px; height: 260px; object-fit: cover;">
+            <div class="project-content">
+                <h3>Inmate Visit Booking System</h3>
+                <p>A secure role-based system for prison visits</p>
+                <p><strong>Tech Stack:</strong> C#, ASP.NET MVC, SQL Server</p>
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li>Visitor registration and authentication</li>
+                    <li>Inmate visit booking and scheduling</li>
+                    <li>Visit approval and rejection workflows</li>
+                </ul>
+                <p><strong>My Role:</strong></p>
+                <ul>
+                    <li>Implemented role-based access control for visitors and prison officials</li>
+                    <li>Built inmate visit booking, scheduling, and approval workflows</li>
+                    <li>Developed the SQL Server database structure and relationships</li>
+                </ul>
+                <div class="project-links">
+					<span class="cta cta-outline">
+						<i class="fas fa-lock"></i> Internal Government System
+					</span>
+					<span class="cta cta-outline">
+						<i class="fas fa-shield-alt"></i> Source Code Confidential
+					</span>
+					<p style="margin-top:15px;color:#666;font-style:italic;">
+						Developed within a government environment.
+						Source code and live system access are restricted due to security and confidentiality requirements.
+					</p>
+				</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <div class="container contact-container">
+        <h2>Let's Connect</h2>
+        <p>Open to junior software developer opportunities. Feel free to reach out!</p>
+        <div class="contact-cards">
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p><a href="mailto:mapulamichellbanda@gmail.com">mapulamichellbanda@gmail.com</a></p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Location</h3>
+                <p>Pretoria, South Africa</p>
+            </div>
+            <div class="contact-card">
+                <i class="fab fa-linkedin-in"></i>
+                <h3>LinkedIn</h3>
+                <p><a href="https://www.linkedin.com/in/mapula-lekganyane" target="_blank">View Profile →</a></p>
+            </div>
+            <div class="contact-card">
+                <i class="fab fa-github"></i>
+                <h3>GitHub</h3>
+                <p><a href="https://github.com/MapulaLekganyane" target="_blank">View Projects →</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container footer-container">
+        <p>© 2026 Mapula Lekganyane | Full-Stack Developer</p>
+    </div>
+</footer>
+
+<script>
+    (function() {
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+            }
+
+            // Smooth scroll with header offset
+            const header = document.querySelector('header');
+            const allLinks = document.querySelectorAll('a[href^="#"]');
+            
+            allLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const hash = this.getAttribute('href');
+                    if (hash === "#" || !hash.startsWith("#") || hash === "#") return;
+                    const targetElement = document.querySelector(hash);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const headerHeight = header ? header.offsetHeight : 0;
+                        const elementPos = targetElement.getBoundingClientRect().top + window.scrollY;
+                        window.scrollTo({
+                            top: elementPos - headerHeight,
+                            behavior: "smooth"
+                        });
+                        if (navLinks && navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                            if (hamburger) hamburger.classList.remove('active');
+                        }
+                        history.pushState(null, null, hash);
+                    }
+                });
+            });
+
+            // Active nav link on scroll
+            const sections = document.querySelectorAll("section");
+            const navItems = document.querySelectorAll(".nav-links a");
+            
+            function setActiveLink() {
+                let current = "";
+                const scrollPosition = window.scrollY + 120;
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        current = section.getAttribute("id");
+                    }
+                });
+                navItems.forEach(item => {
+                    item.classList.remove("active");
+                    const href = item.getAttribute("href");
+                    if (href === `#${current}`) {
+                        item.classList.add("active");
+                    }
+                });
+            }
+            window.addEventListener("scroll", setActiveLink);
+            setActiveLink();
+
+            // Scroll reveal
+            const faders = document.querySelectorAll('.fade-up');
+            const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -30px 0px" };
+            const appearOnScroll = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+            faders.forEach(fader => appearOnScroll.observe(fader));
+        });
+    })();
+</script>
+</body>
+</html>
