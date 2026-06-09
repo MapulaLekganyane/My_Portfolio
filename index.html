@@ -128,16 +128,17 @@
         }
 
         /* ===== HERO SECTION (with background image) ===== */
-        #hero {
+    #hero {
             min-height: 100vh;
+			min-height: 100svh;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             background-image: url('mapula-profile.jpg');
-            background-size: 100% auto;
-            background-position: center 90%; /* adjust to focus on face */
+            background-size: cover;
+            background-position: center center; /* adjust to focus on face */
             background-repeat: no-repeat;
             
             /* Fallback gradient if image doesn't load */
